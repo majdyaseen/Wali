@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wali — profiles</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #111;
+        padding: 40px 20px;
+      }
+
+      .section-label {
+        text-align: center;
+        color: #555;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 8px 0 16px;
+      }
+
+      .page-title {
+        text-align: center;
+        color: #444;
+        font-size: 10px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+      }
+
+      /* ══════════════════════════════════════
+     INSTAGRAM
+  ══════════════════════════════════════ */
+
+      .ig-wrapper {
+        background: #fff;
+        max-width: 935px;
+        margin: 0 auto 60px;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .ig-profile-header {
+        display: flex;
+        align-items: flex-start;
+        padding: 36px 40px 28px;
+        gap: 56px;
+      }
+
+      .ig-avatar-wrap {
+        flex-shrink: 0;
+      }
+
+      .ig-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 1px solid #dbdbdb;
+        background-image: url("wali-profile.jpg");
+        background-size: cover;
+        background-position: top center;
+        overflow: hidden;
+      }
+
+      .ig-info {
+        flex: 1;
+      }
+
+      .ig-username-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .ig-username {
+        font-size: 20px;
+        font-weight: 300;
+        color: #262626;
+      }
+
+      .ig-btn {
+        padding: 6px 16px;
+        border-radius: 8px;
+        border: 1px solid #dbdbdb;
+        background: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        color: #262626;
+        cursor: pointer;
+      }
+
+      .ig-btn-icon {
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid #dbdbdb;
+        background: #fff;
+        font-size: 14px;
+        cursor: pointer;
+        color: #262626;
+      }
+
+      .ig-stats {
+        display: flex;
+        gap: 44px;
+        margin-bottom: 18px;
+      }
+      .ig-stat {
+        font-size: 15px;
+        color: #262626;
+      }
+      .ig-stat strong {
+        font-weight: 700;
+      }
+
+      .ig-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #262626;
+        margin-bottom: 4px;
+      }
+      .ig-bio {
+        font-size: 14px;
+        color: #262626;
+        line-height: 1.5;
+      }
+
+      /* Tabs */
+      .ig-tabs {
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid #dbdbdb;
+        gap: 56px;
+      }
+
+      .ig-tab {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 14px 0;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #8e8e8e;
+        border-top: 1px solid transparent;
+        margin-top: -1px;
+        cursor: pointer;
+      }
+
+      .ig-tab.active {
+        color: #262626;
+        border-top-color: #262626;
+      }
+
+      /* Grid */
+      .ig-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3px;
+      }
+
+      .ig-post {
+        position: relative;
+        padding-top: 100%;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .ig-post-img {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center top;
+      }
+
+      .ig-post-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        transition: opacity 0.15s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .ig-post:hover .ig-post-overlay {
+        opacity: 1;
+      }
+      .ig-post-stat {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* ══════════════════════════════════════
+     TWITTER / X
+  ══════════════════════════════════════ */
+
+      .tw-wrapper {
+        background: #000;
+        max-width: 600px;
+        margin: 0 auto 60px;
+        border: 1px solid #2f3336;
+        border-radius: 16px;
+        overflow: hidden;
+        color: #e7e9ea;
+      }
+
+      .tw-banner {
+        height: 198px;
+        background-image: url("wali-post3.jpg");
+        background-size: cover;
+        background-position: center 30%;
+        position: relative;
+        /* subtle dark overlay so it doesn't overpower */
+        filter: brightness(0.6);
+      }
+
+      .tw-avatar {
+        position: absolute;
+        bottom: -48px;
+        left: 16px;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        border: 4px solid #000;
+        background-image: url("wali-profile.jpg");
+        background-size: cover;
+        background-position: top center;
+        /* counteract parent brightness filter */
+        filter: brightness(1.67);
+      }
+
+      .tw-action-row {
+        display: flex;
+        justify-content: flex-end;
+        padding: 12px 16px;
+        gap: 8px;
+      }
+
+      .tw-btn {
+        padding: 7px 16px;
+        border-radius: 20px;
+        border: 1px solid #536471;
+        background: transparent;
+        color: #e7e9ea;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .tw-info {
+        padding: 4px 16px 16px;
+      }
+
+      .tw-name {
+        font-size: 20px;
+        font-weight: 700;
+        color: #e7e9ea;
+      }
+      .tw-handle {
+        font-size: 15px;
+        color: #71767b;
+        margin-bottom: 12px;
+      }
+      .tw-bio {
+        font-size: 15px;
+        color: #e7e9ea;
+        line-height: 1.5;
+        margin-bottom: 14px;
+      }
+
+      .tw-meta {
+        display: flex;
+        gap: 20px;
+        color: #71767b;
+        font-size: 14px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+      }
+
+      .tw-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .tw-counts {
+        display: flex;
+        gap: 20px;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .tw-count-num {
+        color: #e7e9ea;
+        font-weight: 700;
+      }
+      .tw-count-label {
+        color: #71767b;
+      }
+
+      /* Tabs */
+      .tw-tabs {
+        display: flex;
+        border-bottom: 1px solid #2f3336;
+        margin-top: 14px;
+      }
+
+      .tw-tab {
+        flex: 1;
+        text-align: center;
+        padding: 16px 0;
+        font-size: 15px;
+        color: #71767b;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .tw-tab.active {
+        color: #e7e9ea;
+        font-weight: 700;
+      }
+
+      .tw-tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 56px;
+        height: 4px;
+        background: #1d9bf0;
+        border-radius: 2px;
+      }
+
+      /* Tweets */
+      .tw-tweet {
+        display: flex;
+        gap: 12px;
+        padding: 12px 16px;
+        border-bottom: 1px solid #2f3336;
+      }
+
+      .tw-tweet-avi {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background-image: url("wali-profile.jpg");
+        background-size: cover;
+        background-position: top center;
+      }
+
+      .tw-tweet-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .tw-tweet-row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 2px;
+        flex-wrap: wrap;
+      }
+
+      .tw-tname {
+        font-size: 15px;
+        font-weight: 700;
+        color: #e7e9ea;
+      }
+      .tw-thandle {
+        font-size: 15px;
+        color: #71767b;
+      }
+      .tw-tdot {
+        color: #71767b;
+      }
+      .tw-ttime {
+        font-size: 15px;
+        color: #71767b;
+      }
+
+      .tw-pinned-tag {
+        font-size: 13px;
+        color: #71767b;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .tw-tweet-text {
+        font-size: 15px;
+        color: #e7e9ea;
+        line-height: 1.55;
+        margin-bottom: 12px;
+      }
+
+      .tw-reply-to {
+        font-size: 15px;
+        color: #71767b;
+        margin-bottom: 4px;
+      }
+      .tw-reply-to span {
+        color: #1d9bf0;
+      }
+
+      .tw-actions {
+        display: flex;
+        gap: 28px;
+        color: #71767b;
+        font-size: 13px;
+      }
+
+      .tw-act {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        transition: color 0.1s;
+      }
+
+      .tw-act:hover {
+        color: #1d9bf0;
+      }
+      .tw-act.heart:hover {
+        color: #f91880;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="page-title">wali octave willhelm</p>
+
+    <!-- ─────────────────────────────────────────
+     INSTAGRAM
+───────────────────────────────────────── -->
+    <p class="section-label">instagram</p>
+
+    <div class="ig-wrapper">
+      <div class="ig-profile-header">
+        <div class="ig-avatar-wrap">
+          <div class="ig-avatar"></div>
+        </div>
+        <div class="ig-info">
+          <div class="ig-username-row">
+            <span class="ig-username">wali.octave</span>
+            <button class="ig-btn">Follow</button>
+            <button class="ig-btn">Message</button>
+            <button class="ig-btn-icon">⋯</button>
+          </div>
+          <div class="ig-stats">
+            <div class="ig-stat"><strong>8</strong> posts</div>
+            <div class="ig-stat"><strong>847</strong> followers</div>
+            <div class="ig-stat"><strong>1,204</strong> following</div>
+          </div>
+          <div class="ig-name">Wali W.</div>
+          <div class="ig-bio">medic.</div>
+        </div>
+      </div>
+
+      <div class="ig-tabs">
+        <div class="ig-tab active">⊞&nbsp; Posts</div>
+        <div class="ig-tab">▣&nbsp; Reels</div>
+        <div class="ig-tab">🏷&nbsp; Tagged</div>
+      </div>
+
+      <div class="ig-grid">
+        <!-- 1: profile shot — scrubs + denim, hospital elevator (newest) -->
+        <div class="ig-post">
+          <div
+            class="ig-post-img"
+            style="background-image: url(&quot;wali-profile.jpg&quot;)"
+          ></div>
+          <div class="ig-post-overlay">
+            <span class="ig-post-stat">♥ 203</span>
+            <span class="ig-post-stat">💬 11</span>
+          </div>
+        </div>
+
+        <!-- 2: navy scrubs + tactical backpack, elevator -->
+        <div class="ig-post">
+          <div
+            class="ig-post-img"
+            style="background-image: url(&quot;wali-post1.jpg&quot;)"
+          ></div>
+          <div class="ig-post-overlay">
+            <span class="ig-post-stat">♥ 94</span>
+            <span class="ig-post-stat">💬 5</span>
+          </div>
+        </div>
+
+        <!-- 3: arms crossed, clipboard, MRI scans -->
+        <div class="ig-post">
+          <div
+            class="ig-post-img"
+            style="
+              background-image: url(&quot;wali-post2.jpg&quot;);
+              background-position: center center;
+            "
+          ></div>
+          <div class="ig-post-overlay">
+            <span class="ig-post-stat">♥ 512</span>
+            <span class="ig-post-stat">💬 34</span>
+          </div>
+        </div>
+
+        <!-- 4: doctor asleep in hospital waiting room chairs -->
+        <div class="ig-post">
+          <div
+            class="ig-post-img"
+            style="
+              background-image: url(&quot;wali-post3.jpg&quot;);
+              background-position: center center;
+            "
+          ></div>
+          <div class="ig-post-overlay">
+            <span class="ig-post-stat">♥ 847</span>
+            <span class="ig-post-stat">💬 62</span>
+          </div>
+        </div>
+
+        <!-- 5: sleeping in bed, warm lamp light -->
+        <div class="ig-post">
+          <div
+            class="ig-post-img"
+            style="
+              background-image: url(&quot;wali-post4.jpg&quot;);
+              background-position: center center;
+            "
+          ></div>
+          <div class="ig-post-overlay">
+            <span class="ig-post-stat">♥ 127</span>
+            <span class="ig-post-stat">💬 9</span>
+          </div>
+        </div>
+
+        <!-- 6: person drinking from a cup, dim warm room -->
+        <div class="ig-post">
+          <div
+            class="ig-post-img"
+            style="
+              background-image: url(&quot;wali-post5.jpg&quot;);
+              background-position: center center;
+            "
+          ></div>
+          <div class="ig-post-overlay">
+            <span class="ig-post-stat">♥ 58</span>
+            <span class="ig-post-stat">💬 4</span>
+          </div>
+        </div>
+
+        <!-- 7: hands holding a rubik's cube -->
+        <div class="ig-post">
+          <div
+            class="ig-post-img"
+            style="
+              background-image: url(&quot;wali-post6.jpg&quot;);
+              background-position: center center;
+            "
+          ></div>
+          <div class="ig-post-overlay">
+            <span class="ig-post-stat">♥ 43</span>
+            <span class="ig-post-stat">💬 2</span>
+          </div>
+        </div>
+
+        <!-- 8: white shirt + striped tie, hands folded -->
+        <div class="ig-post">
+          <div
+            class="ig-post-img"
+            style="
+              background-image: url(&quot;wali-post7.jpg&quot;);
+              background-position: center top;
+            "
+          ></div>
+          <div class="ig-post-overlay">
+            <span class="ig-post-stat">♥ 31</span>
+            <span class="ig-post-stat">💬 1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────
+     TWITTER / X
+───────────────────────────────────────── -->
+    <p class="section-label">twitter / x</p>
+
+    <div class="tw-wrapper">
+      <div class="tw-banner">
+        <div class="tw-avatar"></div>
+      </div>
+
+      <div class="tw-action-row">
+        <button class="tw-btn">Follow</button>
+        <button class="tw-btn">Message</button>
+      </div>
+
+      <div class="tw-info">
+        <div class="tw-name">Wali</div>
+        <div class="tw-handle">@woctave</div>
+        <div class="tw-bio">medic.</div>
+        <div class="tw-meta">
+          <div class="tw-meta-item">📅 Joined March 2021</div>
+        </div>
+        <div class="tw-counts">
+          <div>
+            <span class="tw-count-num">892</span>&nbsp;<span
+              class="tw-count-label"
+              >Following</span
+            >
+          </div>
+          <div>
+            <span class="tw-count-num">234</span>&nbsp;<span
+              class="tw-count-label"
+              >Followers</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="tw-tabs">
+        <div class="tw-tab active">Posts</div>
+        <div class="tw-tab">Replies</div>
+        <div class="tw-tab">Media</div>
+        <div class="tw-tab">Likes</div>
+      </div>
+
+      <!-- PINNED -->
+      <div class="tw-tweet">
+        <div class="tw-tweet-avi"></div>
+        <div class="tw-tweet-body">
+          <div class="tw-pinned-tag">📌 Pinned</div>
+          <div class="tw-tweet-row">
+            <span class="tw-tname">Wali</span>
+            <span class="tw-thandle">@woctave</span>
+            <span class="tw-tdot">·</span>
+            <span class="tw-ttime">Feb 14</span>
+          </div>
+          <div class="tw-tweet-text">
+            hope isn't believing everything will be okay. it's choosing to keep
+            going when you know it might not be.
+          </div>
+          <div class="tw-actions">
+            <div class="tw-act">💬 <span>14</span></div>
+            <div class="tw-act">🔁 <span>27</span></div>
+            <div class="tw-act heart">♥ <span>403</span></div>
+            <div class="tw-act">📤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- vitals check -->
+      <div class="tw-tweet">
+        <div class="tw-tweet-avi"></div>
+        <div class="tw-tweet-body">
+          <div class="tw-tweet-row">
+            <span class="tw-tname">Wali</span>
+            <span class="tw-thandle">@woctave</span>
+            <span class="tw-tdot">·</span>
+            <span class="tw-ttime">3d</span>
+          </div>
+          <div class="tw-tweet-text">
+            vitals check: when did you last drink water. not the patient. you.
+          </div>
+          <div class="tw-actions">
+            <div class="tw-act">💬 <span>8</span></div>
+            <div class="tw-act">🔁 <span>19</span></div>
+            <div class="tw-act heart">♥ <span>312</span></div>
+            <div class="tw-act">📤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- take a breath -->
+      <div class="tw-tweet">
+        <div class="tw-tweet-avi"></div>
+        <div class="tw-tweet-body">
+          <div class="tw-tweet-row">
+            <span class="tw-tname">Wali</span>
+            <span class="tw-thandle">@woctave</span>
+            <span class="tw-tdot">·</span>
+            <span class="tw-ttime">1w</span>
+          </div>
+          <div class="tw-tweet-text">take a breath.</div>
+          <div class="tw-actions">
+            <div class="tw-act">💬 <span>1</span></div>
+            <div class="tw-act">🔁 <span>5</span></div>
+            <div class="tw-act heart">♥ <span>67</span></div>
+            <div class="tw-act">📤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPLY -->
+      <div class="tw-tweet">
+        <div class="tw-tweet-avi"></div>
+        <div class="tw-tweet-body">
+          <div class="tw-tweet-row">
+            <span class="tw-tname">Wali</span>
+            <span class="tw-thandle">@woctave</span>
+            <span class="tw-tdot">·</span>
+            <span class="tw-ttime">2w</span>
+          </div>
+          <div class="tw-reply-to">Replying to <span>@ILoveShoko</span></div>
+          <div class="tw-tweet-text">you did good today.</div>
+          <div class="tw-actions">
+            <div class="tw-act">💬 <span>0</span></div>
+            <div class="tw-act">🔁 <span>0</span></div>
+            <div class="tw-act heart">♥ <span>2</span></div>
+            <div class="tw-act">📤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- panicking -->
+      <div class="tw-tweet">
+        <div class="tw-tweet-avi"></div>
+        <div class="tw-tweet-body">
+          <div class="tw-tweet-row">
+            <span class="tw-tname">Wali</span>
+            <span class="tw-thandle">@woctave</span>
+            <span class="tw-tdot">·</span>
+            <span class="tw-ttime">3w</span>
+          </div>
+          <div class="tw-tweet-text">
+            if someone is panicking: don't say calm down. say take a breath.
+            it's an instruction, not a judgment. then take one with them.
+          </div>
+          <div class="tw-actions">
+            <div class="tw-act">💬 <span>17</span></div>
+            <div class="tw-act">🔁 <span>41</span></div>
+            <div class="tw-act heart">♥ <span>212</span></div>
+            <div class="tw-act">📤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- kept someone calm -->
+      <div class="tw-tweet">
+        <div class="tw-tweet-avi"></div>
+        <div class="tw-tweet-body">
+          <div class="tw-tweet-row">
+            <span class="tw-tname">Wali</span>
+            <span class="tw-thandle">@woctave</span>
+            <span class="tw-tdot">·</span>
+            <span class="tw-ttime">May 3</span>
+          </div>
+          <div class="tw-tweet-text">
+            you kept someone calm through something they were terrified of. it
+            won't be in the chart. it still counted.
+          </div>
+          <div class="tw-actions">
+            <div class="tw-act">💬 <span>22</span></div>
+            <div class="tw-act">🔁 <span>58</span></div>
+            <div class="tw-act heart">♥ <span>341</span></div>
+            <div class="tw-act">📤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- first time losing someone -->
+      <div class="tw-tweet">
+        <div class="tw-tweet-avi"></div>
+        <div class="tw-tweet-body">
+          <div class="tw-tweet-row">
+            <span class="tw-tname">Wali</span>
+            <span class="tw-thandle">@woctave</span>
+            <span class="tw-tdot">·</span>
+            <span class="tw-ttime">Apr 28</span>
+          </div>
+          <div class="tw-tweet-text">
+            if it's your first time losing someone: it doesn't get easier. it
+            gets quieter. that's different.
+          </div>
+          <div class="tw-actions">
+            <div class="tw-act">💬 <span>31</span></div>
+            <div class="tw-act">🔁 <span>44</span></div>
+            <div class="tw-act heart">♥ <span>156</span></div>
+            <div class="tw-act">📤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- still charting at 2am -->
+      <div class="tw-tweet">
+        <div class="tw-tweet-avi"></div>
+        <div class="tw-tweet-body">
+          <div class="tw-tweet-row">
+            <span class="tw-tname">Wali</span>
+            <span class="tw-thandle">@woctave</span>
+            <span class="tw-tdot">·</span>
+            <span class="tw-ttime">Apr 14</span>
+          </div>
+          <div class="tw-tweet-text">
+            to whoever is still charting at 2am: the patient made it. you did
+            your job. go eat something.
+          </div>
+          <div class="tw-actions">
+            <div class="tw-act">💬 <span>9</span></div>
+            <div class="tw-act">🔁 <span>22</span></div>
+            <div class="tw-act heart">♥ <span>187</span></div>
+            <div class="tw-act">📤</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
